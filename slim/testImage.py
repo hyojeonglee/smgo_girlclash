@@ -10,6 +10,7 @@ import shutil
 import tensorflow as tf
 import os
 from slim import smgo_image_classifier
+from mysite import settings
 
 from django.db import models
 
@@ -19,7 +20,9 @@ slim = tf.contrib.slim
 
 dataset_dir = '/home/sm/PycharmProjects/test/blog/static/media'
 
-classes = ['_face', '_fashion', '_food', '_nature', '_pet', '_etc']
+classes = ['face', 'fashion', 'food', 'nature', 'pet', 'etc']
+funcs = [Face(),Fashion(),Food(),Nature(),Pet()]
+dir_path = ['face/','fashion/','food/','nature/','pet/']
 
 MIN_PROBABIL = 0.5
 
@@ -35,11 +38,19 @@ class Classifier():
 
             if (probabilities[index] < MIN_PROBABIL):
                 shutil.copy(photo_filenames[i], dirs[classes.__len__() - 1])
-                #etc = Etc.objects.get()
-                #etc.save(photo_filenames[i], )
+
+                etc = Etc()
+                etc.file = 'etc/'+os.path.basename(photo_filenames[i])
+                etc.save()
+
             else:
                 shutil.copy(photo_filenames[i], dirs[index])
-
+                switch={
+                    0:Face(),1:Fashion(),2:Food(),3:Nature(),4:Pet()
+                }
+                save_model = switch[index]
+                save_model.file = dir_path[index] + os.path.basename(photo_filenames[i])
+                save_model.save()
 
 def make_dir():
     dirname = []

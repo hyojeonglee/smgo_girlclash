@@ -39,7 +39,7 @@ class Picture(models.Model):
     # file = models.ImageField(upload_to="pictures")
     file = models.ImageField(upload_to="pictures")
     slug = models.SlugField(max_length=50, blank=True)
-
+    image_url = models.URLField(null=True, blank=True)
     def __str__(self):
         return self.file.name
 
@@ -65,8 +65,9 @@ class Etc(models.Model):
 
     """
     # file = models.ImageField(upload_to="pictures")
-    file = models.ImageField(upload_to="pictures")
-    picture = models.ForeignKey(Picture)
+    file = models.ImageField(upload_to="etc" , null=True)
+    picture = models.ForeignKey(Picture, null=True)
+    image_url = models.URLField(null=True, blank=True)
     def __str__(self):
         return self.file.name
 
@@ -91,9 +92,9 @@ class Face(models.Model):
 
     """
     # file = models.ImageField(upload_to="pictures")
-    file = models.ImageField(upload_to="pictures")
-    slug = models.SlugField(max_length=50, blank=True)
-    picture = models.ForeignKey(Picture)
+    file = models.ImageField(upload_to="face", null=True)
+    slug = models.SlugField(max_length=50, null=True)
+    picture = models.ForeignKey(Picture, null=True)
     def __str__(self):
         return self.file.name
 
@@ -118,9 +119,9 @@ class Fashion(models.Model):
 
     """
     # file = models.ImageField(upload_to="pictures")
-    file = models.ImageField(upload_to="pictures")
-    slug = models.SlugField(max_length=50, blank=True)
-    picture = models.ForeignKey(Picture)
+    file = models.ImageField(upload_to="fashion", null=True)
+    slug = models.SlugField(max_length=50, null=True)
+    picture = models.ForeignKey(Picture, null=True)
     def __str__(self):
         return self.file.name
 
@@ -146,9 +147,9 @@ class Food(models.Model):
 
     """
     # file = models.ImageField(upload_to="pictures")
-    file = models.ImageField(upload_to="pictures")
-    slug = models.SlugField(max_length=50, blank=True)
-    picture = models.ForeignKey(Picture)
+    file = models.ImageField(upload_to="food", null=True)
+    slug = models.SlugField(max_length=50, null=True)
+    picture = models.ForeignKey(Picture, null=True)
     def __str__(self):
         return self.file.name
 
@@ -174,9 +175,9 @@ class Nature(models.Model):
 
     """
     # file = models.ImageField(upload_to="pictures")
-    file = models.ImageField(upload_to="pictures")
-    slug = models.SlugField(max_length=50, blank=True)
-    picture = models.ForeignKey(Picture)
+    file = models.ImageField(upload_to="nature", null=True)
+    slug = models.SlugField(max_length=50, null=True)
+    picture = models.ForeignKey(Picture, null=True)
     def __str__(self):
         return self.file.name
 
@@ -201,9 +202,9 @@ class Pet(models.Model):
 
     """
     # file = models.ImageField(upload_to="pictures")
-    file = models.ImageField(upload_to="pictures")
-    slug = models.SlugField(max_length=50, blank=True)
-    picture = models.ForeignKey(Picture)
+    file = models.ImageField(upload_to="pet", null=True)
+    slug = models.SlugField(max_length=50, null=True)
+    picture = models.ForeignKey(Picture, null=True)
     def __str__(self):
         return self.file.name
 

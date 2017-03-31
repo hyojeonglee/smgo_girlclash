@@ -10,7 +10,7 @@ import json
 
 from django.http import HttpResponse
 from django.views.generic import CreateView, DeleteView, ListView
-from .models import Picture
+from .models import Picture, Etc, Face, Fashion,Food, Nature,Pet
 from .response import JSONResponse, response_mimetype
 from .serialize import serialize
 
@@ -18,7 +18,14 @@ from .serialize import serialize
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('created_date')
     pictures = Picture.objects.all()
-    params = {'pictures': pictures, 'posts': posts}
+    etcs = Etc.objects.all()
+    faces = Face.objects.all()
+    fashions = Fashion.objects.all()
+    foods = Food.objects.all()
+    natures = Nature.objects.all()
+    pets = Pet.objects.all()
+
+    params = {'pictures': pictures,'etcs':etcs,'faces':faces,'fashions':fashions,'foods':foods,'natures':natures,'pets':pets, 'posts': posts}
     return render(request, 'blog/post_list.html', params)
 
 def post_detail(request, pk):
